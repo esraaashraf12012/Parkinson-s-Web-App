@@ -13,8 +13,7 @@ $run1 = mysqli_query($conn, $query1) or die (mysqli_error($conn));
 $doctorNames = mysqli_fetch_all($run1, MYSQLI_ASSOC);
 session_start();
 
-if(isset($_SESSION['ID'])){
-$ID=$_SESSION['ID'];}
+
 
 //var_dump($result);
 ?>
@@ -36,23 +35,33 @@ $ID=$_SESSION['ID'];}
     
     <style>
         body {
-  background-image:repeating-linear-gradient(135deg, #000000 10%, #2f00ff 100%) ;
+   background-image: linear-gradient(90deg, #a8dad7 10%, #42b1ab 100%);
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   font-family: "Open Sans", sans-serif;
   color: #000000;
+
         }
   #box{
-   width: 50%;
+   width: 60%;
   
   
   background: #ffffff;
   border-radius: 10px;
  margin-top:50px;
  
- 
-  
+  }
+#nav {
+background-image: linear-gradient(90deg, #285f64 10%, #347f85 100%);
+            font-family: "Open Sans", sans-serif;
+            
+
+        }
+      table, th, td, tr {
+          border: 3px solid black;
+          font-size: 50px;
+      }
   
   
 }
@@ -61,6 +70,47 @@ $ID=$_SESSION['ID'];}
 
 
 <body>
+  <nav class="navbar navbar-expand-lg navbar-dark " id="nav">
+<a class="navbar-brand" href="#">
+    <img src="logo1.png" width="200" height="60" class="d-inline-block align-top" alt="">
+             </a>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+
+                <a class="nav-link" href="welcome.php">Main</a>
+            </li>
+            
+
+
+        </ul>
+
+    </nav>
+<!-- Success Alert -->
+     <?php if(isset($_SESSION['success'])) {
+             $success = $_SESSION['success'];
+	         unset($_SESSION['success']);
+     ?>
+    <div class="alert alert-success alert-dismissible d-flex align-items-center fade show">
+    <i class="bi-check-circle-fill"></i>
+    <strong class="mx-2">Success!</strong> <?php echo $success?>
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+</div>
+	 <?php } ?>
+	
+<!-- Error Alert -->
+<?php if(isset($_SESSION['error'])) {
+             $error = $_SESSION['error'];
+	         unset($_SESSION['error']);
+     ?>
+<div class="alert alert-danger alert-dismissible d-flex align-items-center fade show">
+    <i class="bi-exclamation-octagon-fill"></i>
+    <strong class="mx-2">Error!</strong><?php echo $error?>
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+</div>	
+        <?php } ?>
+	
+
+		
     <div class="container mt" id="box">
         <!-- <h3 class="mb-3">PARKINSON'S DISEASE</h3> -->
         <ul class="nav nav-tabs">
@@ -101,15 +151,15 @@ $ID=$_SESSION['ID'];}
                           <input type="password" id="password" class="form-control" placeholder="write your password" required name="passward"/>
                         </div>
                         <!-- </button> -->
-						    <h4><?php if($ID=='lf'){
-								echo "login failed :incorrect email or passward)";
-								$ID='t';
-								}
-			                    ?>
-							</h4>
-                        <div>
-                            <button type="submit" class="btn btn-primary mb-3" name="login">LOGIN</button>
+						    
+						<div>
+                            <button type="submit" class="btn btn-outline-secondary"  name="login">LOGIN</button>
                         </div>
+						
+							  
+                       
+
+
                        
                       </form>
                     </div>
@@ -171,9 +221,10 @@ $ID=$_SESSION['ID'];}
                                     </div>
                                     <!-- </button> -->
                         <div>
-                            <button type="submit" class="btn btn-primary mb-3" name="d_submit">REGISTER</button>
+                            <button type="submit" class="btn btn-outline-secondary" name="d_submit">REGISTER</button>
                         </div>
 
+                         
                        </form>
                     </div>
                    
@@ -243,8 +294,12 @@ $ID=$_SESSION['ID'];}
                                     </div>
                                     <!-- </button> -->
                         <div>
-                            <button type="submit" class="btn btn-primary mb-3" name="p_submit">REGISTER</button>
-                        </div>                                                                    
+                            <button type="submit" class="btn btn-outline-secondary" name="p_submit">REGISTER</button>
+                        </div> 
+                        
+                         
+						
+                        
                       </form>
                     </div>
                     </div>
@@ -253,6 +308,7 @@ $ID=$_SESSION['ID'];}
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+       
 </body>
 
 </html>

@@ -32,85 +32,110 @@ if(isset($_SESSION['EMAIL']) && isset($_SESSION['ID'])){
 	}
 }
 ?>
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Home Page</title>
-  <link rel="stylesheet" href="style.css">
-</head>
 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
 
-<body>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
- <div class="container">
-        <nav class="navbar">
-            <ul class="navbar-list">
-			
-                <li class="navbar-item"><a href="DoctorHome.php" class="navbar-link">Home</a></li>
-				<li class="navbar-item"><a href="DoctorSetting.php" class="navbar-link">Settings</a></li>
-			
-			
-			
-                <li class="navbar-item"><a href="ChangePass.php" class="navbar-link">Change password</a></li>
-                <li class="navbar-item"><a href="login.php" class="navbar-link">Logout</a></li>
+    <title> home</title>
+    <style>
+         body {
+            background-image: linear-gradient(90deg, #a8dad7 10%, #42b1ab 100%);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: "Open Sans", sans-serif;
+            color: #000000;
+           
+
+        }
+        #nav {
+            background-image: linear-gradient(90deg, #285f64 10%, #347f85 100%);
+        
+            
+            font-family: "Open Sans", sans-serif;
+     }
+     .container{
+        padding-left: 10%;
+        padding-top: 150px;
+        color: rgb(8, 0, 255);
+
+     }
+     .card{
+        width:95%;
+        height: 200px; 
+        transform: scale(1.2);
+        border-radius: 20px;
+        box-shadow: #191918;
+        color: #000000;
+    
+        
+     }
+     .card-link{
+    text-decoration: none;
+    color:#285f64;
+    display: block;
+     
+     }
+        
+    </style>
+    <body>
+        
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top  "  id="nav">
+        <a class="navbar-brand" href="#">
+    <img src="logo1.png" width="200" height="60" class="d-inline-block align-top" alt="">
+             </a>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    
+                    <a class="nav-link"  href="DoctorHome.php">Home</a>
+                </li>
+                <li class="nav-item">
+                    
+                    <a class="nav-link" href="DoctorSetting.php">Settings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="ChangePass.php">Change password</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="welcome.php">Logout</a>
+                </li>
             </ul>
-        </nav>
-    </div>
+                </nav>
 
-
-
-    <div class="main-section">
-        <div class="main-text">
-            <h1 class="name">Hello, <?php echo htmlspecialchars($row['NAME']);?></h1>
-            <p class="job">your information</p>
+<!-- Card section -->
+<div  class="container" >
+<?php foreach($patients as $patient ){ ?>
+<div class="card"  >
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="icon2.png" class="img-fluid rounded-start" style="width: 80%; height: 200px;" alt="patient1">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title"><?php echo htmlspecialchars('Name: '.$patient['NAME']);?></h5>
+          <p class="card-text"><?php echo htmlspecialchars('Gender: '.$patient['GENDER']);?> </p>
+		  <p class="card-text"><?php echo htmlspecialchars('Age: '.$patient['AGE']);?> </p>
+		  <p class="card-text"><?php echo htmlspecialchars('Number: '.$patient['PHONE_NUMBER']);?> </p>
+		  
+          <a href="patient.php?id=<?php echo $patient['ID'] ?>" class="card-link">More information</a>
         </div>
+      </div>
     </div>
+  </div>
+  <br><br><br>
+  <?php }?>
+</div>
+
+ 
+ 
+    </body>
     
-    <div class="cards">
-        <div class="card1">
-            <div class="card-content center">
-            <div>
-                <h4><?php echo htmlspecialchars('Name:'.$row['NAME']);?></h4>
-				<h4><?php echo htmlspecialchars('Clinic Address:'.$row['CLINIC_ADDRESS'].','.$row['CITY']);?></h4>
-				<h4><?php echo htmlspecialchars('Number:'.$row['PHONE_NUMBER']);?></h4>
-			</div>	
-            </div>
-		
-        </div>
-    </div>
-
-
-
-<div class="main-section">
-        <div class="main-text">
-            <p class="job">your patients' information</p>
-        </div>
-    </div>
-
-
-
-
-<?php foreach($patients as $patient){ ?>
-    <div class="cards">
-        <div class="card1">
-            <div class="card-content center">
-            <div>
-                <h4><?php echo htmlspecialchars('Name:'.$patient['NAME']);?></h4>
-				<h4><?php echo htmlspecialchars('Gender:'.$patient['GENDER']);?></h4>
-				<h4><?php echo htmlspecialchars('Age:'.$patient['AGE']);?></h4>
-				<h4><?php echo htmlspecialchars('Number:'.$patient['PHONE_NUMBER']);?></h4>
-				<?php $_SESSION['patient']=$patient;?>
-                <a href="table.php" class="card-link">information</a>
-			</div>	
-            </div>
-		
-        </div>
-    </div>
-<?php }?>
-
-
-    
-</body>
-</html>

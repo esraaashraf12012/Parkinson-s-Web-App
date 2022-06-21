@@ -30,7 +30,7 @@ if(isset($_SESSION['EMAIL']) && isset($_SESSION['ID'])){
 		where ID=$ID";
 		$run = mysqli_query($conn, $query) or die (mysqli_error($conn));
 		if($run){
-			echo("Name changed successfully");
+			$_SESSION['success'] ="Name changed successfully";
 			
 		}
 	}
@@ -43,7 +43,7 @@ if(isset($_SESSION['EMAIL']) && isset($_SESSION['ID'])){
 		where ID=$ID";
 		$run = mysqli_query($conn, $query) or die (mysqli_error($conn));
 		if($run){
-			echo("Birthdate changed successfully");
+			$_SESSION['success'] ="Birthdate changed successfully";
 			
 		}
 	}	
@@ -62,7 +62,7 @@ if(isset($_SESSION['EMAIL']) && isset($_SESSION['ID'])){
 		where ID=$ID";
 		$run = mysqli_query($conn, $query) or die (mysqli_error($conn));
 		if($run){
-			echo("Doctor changed successfully");
+			$_SESSION['success'] ="Doctor changed successfully";
 			
 		}
 	}	
@@ -75,7 +75,7 @@ if(isset($_SESSION['EMAIL']) && isset($_SESSION['ID'])){
 		where ID=$ID";
 		$run = mysqli_query($conn, $query) or die (mysqli_error($conn));
 		if($run){
-			echo("Phone Number changed successfully");
+			$_SESSION['success'] ="Phone Number changed successfully";
 			
 		}
 	}		
@@ -95,18 +95,19 @@ if(isset($_SESSION['EMAIL']) && isset($_SESSION['ID'])){
 
 <head>
   <meta charset="UTF-8">
-  <title>Change Password</title>
-  <link rel="stylesheet" href="style.css">
+  <title>PatientSetting</title>
+  
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
   <style>
     body {
-background-image:repeating-linear-gradient(135deg, #000000 10%, #2f00ff 100%) ;
+ background-image: linear-gradient(90deg, #a8dad7 10%, #42b1ab 100%);
 background-size: cover;
 background-repeat: no-repeat;
 background-attachment: fixed;
 font-family: "Open Sans", sans-serif;
 color: #000000;
+
 }
 #box{
 width: 50%;
@@ -116,25 +117,65 @@ border-radius: 10px;
 margin-top:50px;
 }
 
-    
+#nav {
+	background-image: linear-gradient(90deg, #285f64 10%, #347f85 100%);
+            font-family: "Open Sans", sans-serif;
+            
+
+        }
 </style>
 </head>
 
 
 <body>
 
- <div class="container">
-        <nav class="navbar">
-            <ul class="navbar-list">
+	<nav class="navbar navbar-expand-lg navbar-dark  " id="nav">
+        <a class="navbar-brand" href="#">
+    <img src="logo1.png" width="200" height="60" class="d-inline-block align-top" alt="">
+             </a>
+		<ul class="navbar-nav">
+			<li class="nav-item">
+				
+				<a class="nav-link"  href="DoctorHome.php">Home</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="DoctorSetting.php">Settings</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="ChangePass.php">Change password</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="welcome.php">Logout</a>
+			</li>
 			
-                <li class="navbar-item"><a href="PatientHome.php" class="navbar-link">Home</a></li>
-				<li class="navbar-item"><a href="PatientSetting.php" class="navbar-link">Settings</a></li>
 			
-                <li class="navbar-item"><a href="ChangePass.php" class="navbar-link">Change password</a></li>
-                <li class="navbar-item"><a href="login.php" class="navbar-link">Logout</a></li>
-            </ul>
-        </nav>
-    </div>
+		</ul>
+	
+	</nav>
+	<!-- Success Alert -->
+      <?php if(isset($_SESSION['success'])) {
+             $success = $_SESSION['success'];
+	         unset($_SESSION['success']);
+       ?>
+             <div class="alert alert-success alert-dismissible d-flex align-items-center fade show">
+                 <i class="bi-check-circle-fill"></i>
+                 <strong class="mx-2">Success!</strong> <?php echo $success?>
+                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+             </div>
+	   <?php } ?>
+	 
+	
+ <!-- Error Alert -->
+      <?php if(isset($_SESSION['error'])) {
+             $error = $_SESSION['error'];
+	         unset($_SESSION['error']);
+       ?>
+            <div class="alert alert-danger alert-dismissible d-flex align-items-center fade show">
+                 <i class="bi-exclamation-octagon-fill"></i>
+                 <strong class="mx-2">Error!</strong><?php echo $error?>
+                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+             </div>	
+      <?php } ?>
 	
   <div class="container mt" id="box">
   <form class="box" action="PatientSetting.php" method="post">
@@ -185,7 +226,7 @@ margin-top:50px;
 
       
         <div>
-            <button type="submit" class="btn btn-primary mb-3" name="update">Update Data</button>
+            <button type="submit" class="btn btn-outline-secondary" name="update">Update Data</button>
         </div>
     </form>
   </div>

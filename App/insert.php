@@ -27,11 +27,11 @@ if(isset($_POST['d_submit'])){
 		$run = mysqli_query($conn, $query) or die (mysqli_error($conn));
 		
 		if($run){
-			$_SESSION['ID']='rs';
+			$_SESSION['success'] = "register successed";
 			header("Location: login.php");
 		}
 		else{
-			$_SESSION['ID']='rf';
+			$_SESSION['error'] = "register failed";
 			header("Location: login.php");
 		}
 	}
@@ -62,9 +62,7 @@ if(isset($_POST['p_submit'])){
 			$row = mysqli_fetch_assoc($run1);
 			$doctor_id =$row['ID'];
 		}
-		else {
-			echo("error=incorrect doctor name");
-		}
+		
 	 
 		$query2 = "insert into user(USER_TYPE,EMAIL,NAME,PASSWORD,BIRTHDAY,GENDER,PHONE_NUMBER,DOCTOR_ID,AGE)
 		VALUES('PATIENT','$email','$name','$passward','$birthdate','$gender','$phone_number','$doctor_id','$age')";
@@ -72,12 +70,12 @@ if(isset($_POST['p_submit'])){
 		$run2 = mysqli_query($conn, $query2) or die (mysqli_error($conn));
 		
 		if($run2){
-			$_SESSION['ID']='rs';
+			$_SESSION['success'] = "register successed";
 			header("Location: login.php");
 			
 		}
 		else{
-			$_SESSION['ID']='rf';
+			$_SESSION['error'] = "register failed";
 			header("Location: login.php");
 		}
 	}
@@ -116,7 +114,7 @@ if(isset($_POST['login'])){
 			}
 		}
 		else{
-			$_SESSION['ID']='lf';
+			$_SESSION['error'] = "login failed : Wrong email or passward";
 			header("Location: login.php");
 			
 			
