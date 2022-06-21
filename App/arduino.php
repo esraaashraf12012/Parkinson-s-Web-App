@@ -15,14 +15,5 @@ if (isset($_GET['api'])) {
         mysqli_query($conn, $query);
     }
 }
-// 	$patient =$_SESSION['patient'];
-// 	$ID=$patient['ID'];
 
-// 	$query1 = "SELECT * FROM patient_reading WHERE Patient_ID='$ID'";
-
-// 	$run1 = mysqli_query($conn, $query1) or die (mysqli_error($conn));
-
-
-// 	$readings = mysqli_fetch_all($run1,MYSQLI_ASSOC);
-// }
 ?>
